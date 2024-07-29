@@ -27,12 +27,10 @@ func convertFull(t *testing.T, fsys fs.FS) (*os.File, llm.KV, llm.Tensors) {
 	}
 	defer f.Close()
 
-	fmt.Println("converting")
 	if err := Convert(fsys, f); err != nil {
 		t.Fatal(err)
 	}
 
-	fmt.Println("convert succeeded")
 	r, err := os.Open(f.Name())
 	if err != nil {
 		t.Fatal(err)
@@ -84,7 +82,6 @@ func TestConvertFull(t *testing.T) {
 				t.Skipf("%s not found", p)
 			}
 
-			fmt.Println("Converting", tt)
 			f, kv, tensors := convertFull(t, os.DirFS(p))
 			actual := make(map[string]string)
 			for k, v := range kv {
