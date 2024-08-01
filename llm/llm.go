@@ -64,14 +64,13 @@ func Quantize(infile, outfile string, ftype fileType, fn func(resp api.ProgressR
 				progressInt := atomic.LoadInt32(store)
 				progress := *(*float32)(unsafe.Pointer(&progressInt))
 				fn(api.ProgressResponse{
-					Status:   fmt.Sprintf("quantizing model %d/%d", int(progress), tensorCount),
-					Type:     "quantize",
+					Status: fmt.Sprintf("quantizing model %d/%d", int(progress), tensorCount),
+					Type:   "quantize",
 				})
-				fmt.Println("Progress: ", progress)
 			case <-done:
 				fn(api.ProgressResponse{
-					Status:   fmt.Sprintf("quantizing model %d/%d", tensorCount, tensorCount),
-					Type:     "quantize",
+					Status: fmt.Sprintf("quantizing model %d/%d", tensorCount, tensorCount),
+					Type:   "quantize",
 				})
 				return
 			}
@@ -79,7 +78,8 @@ func Quantize(infile, outfile string, ftype fileType, fn func(resp api.ProgressR
 	}()
 
 	if rc := C.llama_model_quantize(cinfile, coutfile, &params); rc != 0 {
-		return fmt.Errorf("failed to quantize model. This model architecture may not be supported, or you may need to upgrade Ollama to the latest version")	}
+		return fmt.Errorf("failed to quantize model. This model architecture may not be supported, or you may need to upgrade Ollama to the latest version")
+	}
 
 	return nil
 }
