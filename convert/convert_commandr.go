@@ -48,11 +48,11 @@ func (p *commandr) KV(t *Tokenizer) llm.KV {
 	return kv
 }
 
-func (p *commandr) Tensors(ts []Tensor, nameFunc NameFunc) []*llm.Tensor {
-	var out []*llm.Tensor
+func (p *commandr) Tensors(ts []Tensor, nameFunc NameFunc) []llm.Tensor {
+	var out []llm.Tensor
 	for _, t := range ts {
 		name := nameFunc(t.Name())
-		out = append(out, &llm.Tensor{
+		out = append(out, llm.Tensor{
 			Name:     name,
 			Kind:     t.Kind(),
 			Shape:    t.Shape(),
