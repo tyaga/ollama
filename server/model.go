@@ -112,7 +112,7 @@ func parseFromZipFile(_ context.Context, f *os.File, digest string, fn func(api.
 	defer t.Close()
 	defer os.Remove(t.Name())
 
-	if err := convert.Convert(tempDir, temp, fn); err != nil {
+	if err := convert.Convert(convert.NewZipReader(r, p, 32<<20), t, fn); err != nil {
 		return nil, err
 	}
 

@@ -50,7 +50,7 @@ func (Parameters) specialTokenTypes() []string {
 	}
 }
 
-func (Parameters) writeFile(ws io.WriteSeeker, kv llm.KV, ts []*llm.Tensor, fn func(api.ProgressResponse)) error {
+func (Parameters) writeFile(ws io.WriteSeeker, kv llm.KV, ts []llm.Tensor, fn func(api.ProgressResponse)) error {
 	return llm.WriteGGUF(ws, kv, ts, fn)
 }
 
@@ -66,7 +66,7 @@ type Converter interface {
 	tensorName(string) string
 	// specialTokenTypes returns any special token types the model uses
 	specialTokenTypes() []string
-	writeFile(io.WriteSeeker, llm.KV, []*llm.Tensor, func(api.ProgressResponse)) error
+	writeFile(io.WriteSeeker, llm.KV, []llm.Tensor, func(api.ProgressResponse)) error
 }
 
 type moreParser interface {
