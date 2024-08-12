@@ -556,8 +556,7 @@ func WriteGGUF(ws io.WriteSeeker, kv KV, ts []Tensor, fn func(api.ProgressRespon
 	var alignment int64 = 32
 	for i, t := range ts {
 		fn(api.ProgressResponse{
-			Status: fmt.Sprintf("converting model %d/%d", i + 1, len(ts)),
-			Type: "convert",
+			Status: fmt.Sprintf("converting model %d%%", 100*(i+1)/len(ts)),
 		})
 		if err := ggufWriteTensor(ws, t, alignment); err != nil {
 			return err

@@ -143,8 +143,7 @@ func Convert(fsys fs.FS, ws io.WriteSeeker, fn func(api.ProgressResponse)) error
 
 	tensors := conv.Tensors(ts, conv.tensorName)
 	fn(api.ProgressResponse{
-		Status: fmt.Sprintf("converting model 0/%d",len(tensors)),
-		Type:"convert",
+		Status: fmt.Sprintf("converting model 0%%"),
 	})
 	return conv.writeFile(ws, conv.KV(t), tensors, fn)
 }

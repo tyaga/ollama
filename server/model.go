@@ -100,7 +100,6 @@ func parseFromZipFile(_ context.Context, f *os.File, digest string, fn func(api.
 
 	fn(api.ProgressResponse{
 		Status: "converting model",
-		Type: "convert",
 	})
 
 	// TODO(mxyng): this should write directly into a layer

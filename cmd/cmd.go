@@ -135,7 +135,7 @@ func CreateHandler(cmd *cobra.Command, args []string) error {
 			}
 
 			bar.Set(resp.Completed)
-		}  else if resp.Type == "convert" {
+		} else if strings.Contains(resp.Status, "converting") {
 			spinner.Stop()
 
 			if convertSpin != nil {
